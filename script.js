@@ -1,40 +1,64 @@
-document.getElementById('birthdayForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const birthday = new Date(document.getElementById('birthday').value);
-    const correctBirthday = new Date("2006-05-23"); // Правильная дата рождения
-    const correctName = "Лиза"; // Правильное имя
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Чтобы не было полос прокрутки */
+}
 
-    // Проверка имени и даты рождения
-    if (name === correctName && birthday.toDateString() === correctBirthday.toDateString()) {
-        const kindWords = [
-            Дорогая ${name}, ты — настоящая звезда, освещающая жизнь всех вокруг!,
-            С днём рождения, ${name}! Твоя улыбка — это самое прекрасное, что может быть!,
-            Ты — вдохновение для всех нас, и каждый день с тобой — это подарок!,
-            ${name}, ты приносишь радость в каждую секунду своей жизни!,
-            Ты уникальна, и я горжусь, что знаю тебя, ${name}!,
-            Пусть каждый момент жизни дарит тебе счастье и улыбки, ${name}!
-        ];
+.container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-        const randomIndex = Math.floor(Math.random() * kindWords.length);
-        const message = kindWords[randomIndex];
+input {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
-        // Создаем элемент для анимации
-        const messageElement = document.createElement('div');
-        messageElement.className = 'floating';
-        messageElement.innerText = message;
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-        // Позиционируем элемент случайным образом по горизонтали
-        messageElement.style.left = Math.random() * 100 + 'vw'; // 100% ширины окна
-        document.body.appendChild(messageElement);
+button:hover {
+    background-color: #0056b3;
+}
 
-        // Удаляем элемент через 5 секунд
-        setTimeout(() => {
-            messageElement.remove();
-        }, 5000);
+.hidden {
+    display: none;
+}
 
-    } else {
-        alert("Ошибка: Введите правильное имя и дату рождения.");
+.floating {
+    position: absolute;
+    opacity: 1;
+    animation: fall 5s ease-in forwards; /* Изменили анимацию на fall */
+    font-size: 1.5rem; /* Размер шрифта */
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
     }
-});
+    100% {
+        transform: translateY(100vh); /* Спускаем вниз */
+        opacity: 0; /* Уменьшаем непрозрачность */
+    }
+}
