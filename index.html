@@ -15,12 +15,15 @@
             background-color: #f2e6d4; /* Нежный цвет фона */
             color: #333;
             text-align: center;
+            overflow: hidden; /* Скрываем прокрутку */
+            position: relative; /* Для абсолютного позиционирования лепестков */
         }
 
         .words {
             font-size: 32px;
             margin: 20px;
             animation: fade-in 1s ease forwards;
+            z-index: 2; /* Чтобы текст был выше лепестков */
         }
 
         @keyframes fade-in {
@@ -43,10 +46,47 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 18px;
+            z-index: 2; /* Чтобы кнопка была выше лепестков */
+        }
+
+        .sakura-tree {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 400px;
+            background-image: url('https://cdn.pixabay.com/photo/2017/02/12/15/13/cherry-blossoms-2063713_1280.png'); /* Сакура */
+            background-size: cover;
+            background-position: center;
+            z-index: 1; /* Дерево позади текста и кнопки */
+        }
+
+        .petal {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #FFB2C4; /* Цвет лепестков */
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: fall linear infinite;
+            pointer-events: none; /* Лепестки не будут мешать взаимодействию с кнопками */
+            z-index: 1; /* Лепестки позади текста и кнопки */
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px); /* Начинаем чуть выше видимой области */
+            }
+            100% {
+                transform: translateY(100vh); /* Лепестки падают вниз */
+            }
         }
     </style>
 </head>
 <body>
+    <div class="sakura-tree"></div> <!-- Дерево сакуры -->
+
     <div class="words" id="words-container">Нажмите кнопку, чтобы увидеть слово!</div>
     <button class="button" onclick="showRandomWord()">Далее</button> <!-- Изменен текст кнопки -->
 
@@ -71,7 +111,7 @@
             "Ты делаешь мир лучше.",
             "Ты — настоящее сокровище.",
             "С тобой всегда легко и радостно.",
-            "Ты — мой самый ценный друг.",
+"Ты — мой самый ценный друг.",
             "Ты способна на великие дела.",
             "Ты — художник своей судьбы.",
             "Твое присутствие — это благословение.",
@@ -107,7 +147,7 @@
             "Ты — дружелюбие в чистом виде.",
             "Ты — излучение счастья.",
             "Твоя улыбка — это лекарство.",
-"Ты — блаженство в каждом моменте.",
+            "Ты — блаженство в каждом моменте.",
             "Ты — поток позитива.",
             "Ты — маленькое чудо.",
             "Ты — чистая радость.",
@@ -139,7 +179,8 @@
             "Ты — сокровище, которого так не хватает.",
             "Ты — источник радости.",
             "Ты — цветок, распускающийся среди шипов.",
-            "Ты — мелодия счастья."
+            "Ты — мелодия счастья.",
+            "Ты — пробуждение весны."
         ];
 
         function showRandomWord() {
@@ -150,6 +191,19 @@
             void wordsContainer.offsetWidth; // Принудительное перерисовывание
             wordsContainer.style.animation = ''; // Восстановление анимации
         }
+
+        const createPetal = () => {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            document.body.appendChild(petal);
+            petal.style.left = Math.random() * window.innerWidth + 'px'; // Позиция лепестка по горизонтали
+            petal.style.animationDuration = Math.random() * 2 + 3 + 's'; // Случайная скорость падения
+            petal.style.opacity = Math.random(); // Случайная прозрачность
+            petal.addEventListener('animationend', () => {
+                petal.remove(); // Удаляем лепесток после завершения анимации
+            });
+        };
+setInterval(createPetal, 300); // Создаем лепесток каждые 300 мс
     </script>
 </body>
 </html>
