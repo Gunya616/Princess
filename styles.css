@@ -48,16 +48,17 @@ button:hover {
 .floating {
     position: absolute;
     opacity: 1;
-    animation: float 5s ease-in forwards;
+    animation: fall 5s ease-in forwards; /* Изменили анимацию на fall */
+    font-size: 1.5rem; /* Размер шрифта */
 }
 
-@keyframes float {
+@keyframes fall {
     0% {
         transform: translateY(0);
         opacity: 1;
     }
     100% {
-        transform: translateY(-100vh); /* Поднимаем лепесток вверх */
+        transform: translateY(100vh); /* Спускаем вниз */
         opacity: 0; /* Уменьшаем непрозрачность */
     }
 }
