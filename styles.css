@@ -7,6 +7,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    overflow: hidden; /* Чтобы не было полос прокрутки */
 }
 
 .container {
@@ -42,4 +43,21 @@ button:hover {
 
 .hidden {
     display: none;
+}
+
+.floating {
+    position: absolute;
+    opacity: 1;
+    animation: float 5s ease-in forwards;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh); /* Поднимаем лепесток вверх */
+        opacity: 0; /* Уменьшаем непрозрачность */
+    }
 }
