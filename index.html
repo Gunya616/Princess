@@ -3,24 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Приятные слова</title>
+    <title>Мой персональный сайт</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        /* ... ваши стили ... */
+
+        .heart {
+            position: absolute;
+            top: 20px; /* Расположение сердца */
+            right: 20px; /* Расположение сердца */
+            width: 60px;
+            height: 60px;
+            background-color: red;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .heart:hover {
+            transform: scale(1.1);
+        }
+
+        /* Остальные стили остаются прежними */
+    </style>
 </head>
 <body>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Сменить тему">
+        <span id="theme-icon">🌙</span> <!-- Значок луны для темной темы -->
+    </button>
+
+    <div class="sakura-tree"></div> <!-- Дерево сакуры -->
+
     <div class="container">
-        <h1>Приятные слова для тебя!</h1>
-        <form id="birthdayForm">
-            <label for="name">Имя:</label>
-            <input type="text" id="name" required>
-            <label for="birthday">День рождения:</label>
-            <input type="date" id="birthday" required>
-            <button type="submit">Получить приятные слова</button>
-        </form>
-        <div id="messages" class="hidden">
-            <h2>Твои приятные слова: ааааааааааааааааааааааааааааааааааа</h2>
-            <p id="kindWords"></p>
+        <p>Добро пожаловать!</p>
+        <div class="divider"></div>
+
+        <p>Связь со мной:</p>
+        <div class="social-links">
+            <a href="https://t.me/fenec01" class="badge telegram">Telegram</a>
+            <a href="https://vk.com/fenec" class="badge vk">VK</a>
+            <a href="https://discord.com/users/ваш_дискорд_профиль" class="badge discord">Discord</a>
         </div>
+        <div class="divider"></div>
     </div>
-    <script src="script.js"></script>
+
+    <div class="heart" onclick="window.location.href='words.html'"></div> <!-- Красное сердце -->
+
+    <script>
+        // Ваши скрипты
+        const createPetal = () => {
+            // ... ваш код ...
+        };
+
+        setInterval(createPetal, 300); // Создание лепестка каждые 300 мс
+
+        // Смена темы
+        function toggleTheme() {
+            // ... ваш код ...
+        }
+
+        // Установка темы при загрузке страницы
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.body.classList.add(savedTheme);
+    </script>
 </body>
 </html>
